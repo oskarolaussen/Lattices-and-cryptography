@@ -6,16 +6,16 @@ This program is just an example of how the cryptosystem works.'''
 
 import numpy as np
 ERROR_VECTOR=np.array([1, -1, 1])
-
+	'''input_private_key takes as input the dimension of the private key and outputs the key as a matrix'''
 def input_private_key(n):
 	key=np.empty([n, n])
 	for i in range(n):
 		key[i]=[int(x) for x in input("Input integer coordinates of a basevector in the private key separated by a space ").split()]
 	return key;
 
-	'''generate_public_key takes as input the private key and its dimension. 
+	'''generate_public_key takes as input the private key as a matrix and its dimension. 
 	Then it multiplies the private key with 5 random unimodular matrices from the right hand side thus creating the public key and outputs it'''
-def generate_public_key(n, matrix):
+def generate_public_key(n, pri_key):
 	k=0
 	while k<5:
 		A=np.random.randint(-5,5,size=(n,n))
@@ -24,8 +24,8 @@ def generate_public_key(n, matrix):
 			k=k+1
 	return matrix;
 	
-	'''encyption takes as input the message, the private key and the error vector and outputs the encrypted message.'''
-def encryption(m, matrix, e):
+	'''encryption takes as input the message, the public key and the error vector and outputs the encrypted message.'''
+def encryption(m, pub_key, e):
 	c=np.matmul(matrix,m)+e
 	return c;
 	
