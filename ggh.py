@@ -1,6 +1,6 @@
 ''' This program is an implementation of the GGH cryptosystem. 
 The user inputs the dimension and basevectors of their private key and their message.
-Then the program outputs the encrypted message and decrypted message.
+Then the program outputs the encrypted message and decrypted message, providing that the used private key is orthogonal enough.
 NOTE: GGH should NOT be used to encrypt anything as it has been broken. 
 This program is just an example of how the cryptosystem works.'''
 
@@ -10,7 +10,7 @@ ERROR_VECTOR=np.array([1, -1, 1])
 def input_private_key(n):
 	key=np.empty([n, n])
 	for i in range(n):
-		key[i]=[int(x) for x in input("Input coordinates of a basevector in the private key separated by a space ").split()]
+		key[i]=[int(x) for x in input("Input integer coordinates of a basevector in the private key separated by a space ").split()]
 	return key;
 
 	'''generate_public_key takes as input the private key and its dimension. 
@@ -40,7 +40,7 @@ dimension=int(input("Input the dimension of the private key: "))
 private_key=input_private_key(dimension)
 public_key=generate_public_key(dimension, private_key)
 message=np.empty(dimension)
-message=[int(x) for x in input("Input the message you wish to encrypt ").split()]
+message=[int(x) for x in input("Input the integer vector you wish to encrypt ").split()]
 encrypted=encryption(message, public_key, ERROR_VECTOR)
 print(encrypted)
 decrypted=decryption(encrypted, private_key, public_key)
