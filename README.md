@@ -3,6 +3,9 @@
 ggh.py is an implementation of the GGH cryptosystem.  The user inputs the dimension and basevectors of their private key and their message. Then the program outputs the encrypted message and decrypted message, providing that the used private key is orthogonal enough. NOTE: GGH should NOT be used to encrypt anything as it has been broken. 
 This program is just an example of how the cryptosystem works.
 
+lll.py is an implementation of the LLL lattice reduction algorithm. It takes as input the basis of the lattice and its dimension
+and outputs LLL reduced basis that is more orthogonal. Moreover the first vector of the reduced basis solves the approximate shortest vector problem.
+
 gramschmidt.py takes as input the base vectors of a vector space and outputs an orthogonal basis for that space using the Gram-Schmidt process.
 
 babai.py is an implementation of Babai's algorithm. The algorithm finds the closest lattice point for a given vector
