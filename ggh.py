@@ -24,19 +24,19 @@ def generate_public_key(n, pri_key):
 		if np.linalg.det(A)==1:
 			matrix=np.matmul(matrix,A)
 			k=k+1
-	pub_key = np.matmul(pri_key, matrix)
+	pub_key = np.matmul(matrix, pri_key)
 	return pub_key;
 	
 	'''encryption takes as input the message, the public key and the error vector and outputs the encrypted message.'''
 def encryption(m, pub_key, e):
-	c=np.matmul(pub_key,m)+e
+	c=np.matmul(m, pub_key)+e
 	return c;
 	
 	'''decryption uses Babai's algorithm to decrypt the encrypted message and outputs the original message (if the private key is orthogonal enough).'''
 def decryption(c, pri_key, pub_key):
-	u = np.matmul(np.linalg.inv(pri_key), c)
-	u=np.matmul(pri_key, np.rint(u))
-	result=np.matmul(np.linalg.inv(pub_key),u)
+	u = np.matmul(c, np.linalg.inv(pri_key))
+	u=np.matmul(np.rint(u), pri_key)
+	result=np.matmul(u, np.linalg.inv(pub_key))
 	return result;
 
 dimension=int(input("Input the dimension of the private key: "))
