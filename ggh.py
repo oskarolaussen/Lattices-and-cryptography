@@ -6,7 +6,8 @@ This program is just an example of how the cryptosystem works.'''
 
 import numpy as np
 ERROR_VECTOR=np.array([1, -1, 1])
-	'''input_private_key takes as input the dimension of the private key and outputs the key as a matrix'''
+
+'''input_private_key takes as input the dimension of the private key and outputs the key as a matrix'''
 def input_private_key(n):
 	key=np.empty([n, n])
 	for i in range(n):
@@ -17,16 +18,18 @@ def input_private_key(n):
 	Then it multiplies the private key with 5 random unimodular matrices from the right hand side thus creating the public key and outputs it'''
 def generate_public_key(n, pri_key):
 	k=0
+	matrix = np.identity(n)
 	while k<5:
 		A=np.random.randint(-5,5,size=(n,n))
 		if np.linalg.det(A)==1:
 			matrix=np.matmul(matrix,A)
 			k=k+1
-	return matrix;
+	pub_key = np.matmul(pri_key, matrix)
+	return pub_key;
 	
 	'''encryption takes as input the message, the public key and the error vector and outputs the encrypted message.'''
 def encryption(m, pub_key, e):
-	c=np.matmul(matrix,m)+e
+	c=np.matmul(pub_key,m)+e
 	return c;
 	
 	'''decryption uses Babai's algorithm to decrypt the encrypted message and outputs the original message (if the private key is orthogonal enough).'''
