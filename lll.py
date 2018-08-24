@@ -1,5 +1,5 @@
 '''This is an implementation of the LLL lattice reduction algorithm. The user inputs the name of the file containing the basis on the command line. For example
-"python ggh.py input.txt". The input file must contain a square matrix with base vectors of the lattice as rows.
+"python lll.py input.txt". The input file must contain a square matrix with base vectors of the lattice as rows.
 Coordinates must be separated by a space.
 The program then outputs LLL reduced basis that is more orthogonal. Moreover the first vector of the reduced basis solves the approximate shortest vector of the lattice -problem.'''
 
