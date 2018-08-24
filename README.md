@@ -8,8 +8,10 @@ Then the program outputs the encrypted message and decrypted message, providing 
 NOTE: GGH should NOT be used to encrypt anything as it has been broken. 
 This program is just an example of how the cryptosystem works.
 
-lll.py is an implementation of the LLL lattice reduction algorithm. It takes as input the basis of the lattice and its dimension
-and outputs LLL reduced basis that is more orthogonal. Moreover the first vector of the reduced basis solves the approximate shortest vector problem.
+lll.py This is an implementation of the LLL lattice reduction algorithm. The user inputs the name of the file containing the basis on the command line. For example
+"python lll.py input.txt". The input file must contain a square matrix with base vectors of the lattice as rows.
+Coordinates must be separated by a space.
+The program then outputs LLL reduced basis that is more orthogonal. Moreover the first vector of the reduced basis solves the approximate shortest vector of the lattice -problem.
 
 gramschmidt.py takes as input the base vectors of a vector space and outputs an orthogonal basis for that space using the Gram-Schmidt process.
 
