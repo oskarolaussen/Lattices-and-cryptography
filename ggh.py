@@ -11,11 +11,11 @@ import sys
 
 ERROR_VECTOR = np.array([1, -1, 1])
 
-'''input_private_key takes as input the dimension of the private key and outputs the key as a matrix'''
+
 def input_handler(filename):
 	try:
 		with open(filename, 'r') as infile:
-			n = sum((1 for line in infile))
+			n = sum((1 for line in infile)) #counts lines in infile. This is the expected dimension of the matrix.
 			matrix = np.empty([n, n])
 			i = 0
 			infile.seek(0)
@@ -24,6 +24,7 @@ def input_handler(filename):
 				i = i + 1
 	except Exception as e:
 		print(e)
+		sys.exit(0)
 	return matrix, n
 
 	'''generate_public_key takes as input the private key as a matrix and its dimension. 
