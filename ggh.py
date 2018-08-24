@@ -1,18 +1,30 @@
 ''' This program is an implementation of the GGH cryptosystem. 
-The user inputs the dimension and basevectors of their private key and their message.
+The user inputs the name of the file containing private key on the command line. For example
+"python ggh.py input.txt". The input file must contain a square matrix with base vectors of the private key as rows.
+Coordinates must be separated by a space. Then the program prompts the user for the integer vector they wish to encrypt.
 Then the program outputs the encrypted message and decrypted message, providing that the used private key is orthogonal enough.
 NOTE: GGH should NOT be used to encrypt anything as it has been broken. 
 This program is just an example of how the cryptosystem works.'''
 
 import numpy as np
-ERROR_VECTOR=np.array([1, -1, 1])
+import sys
+
+ERROR_VECTOR = np.array([1, -1, 1])
 
 '''input_private_key takes as input the dimension of the private key and outputs the key as a matrix'''
-def input_private_key(n):
-	key=np.empty([n, n])
-	for i in range(n):
-		key[i]=[int(x) for x in input("Input integer coordinates of a basevector in the private key separated by a space ").split()]
-	return key;
+def input_handler(filename):
+	try:
+		with open(filename, 'r') as infile:
+			n = sum((1 for line in infile))
+			matrix = np.empty([n, n])
+			i = 0
+			infile.seek(0)
+			for line in infile:
+				matrix[i] = [int(x) for x in line.split()]
+				i = i + 1
+	except Exception as e:
+		print(e)
+	return matrix, n
 
 	'''generate_public_key takes as input the private key as a matrix and its dimension. 
 	Then it multiplies the private key with 5 random unimodular matrices from the right hand side thus creating the public key and outputs it'''
@@ -39,9 +51,9 @@ def decryption(c, pri_key, pub_key):
 	result=np.matmul(u, np.linalg.inv(pub_key))
 	return result;
 
-dimension=int(input("Input the dimension of the private key: "))
-private_key=input_private_key(dimension)
-public_key=generate_public_key(dimension, private_key)
+filename = sys.argv[-1]
+private_key, dimension = input_handler(filename)
+public_key = generate_public_key(dimension, private_key)
 message=np.empty(dimension)
 message=[int(x) for x in input("Input the integer vector you wish to encrypt ").split()]
 encrypted=encryption(message, public_key, ERROR_VECTOR)
