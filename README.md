@@ -1,6 +1,11 @@
 # Lattices and cryptography
 
-ggh.py is an implementation of the GGH cryptosystem.  The user inputs the dimension and basevectors of their private key and their message. Then the program outputs the encrypted message and decrypted message, providing that the used private key is orthogonal enough. NOTE: GGH should NOT be used to encrypt anything as it has been broken. 
+ggh.py is an is an implementation of the GGH cryptosystem. 
+The user inputs the name of the file containing private key on the command line. For example
+"python ggh.py input.txt". The input file must contain a square matrix with base vectors of the private key as rows.
+Coordinates must be separated by a space. Then the program prompts the user for the integer vector they wish to encrypt.
+Then the program outputs the encrypted message and decrypted message, providing that the used private key is orthogonal enough.
+NOTE: GGH should NOT be used to encrypt anything as it has been broken. 
 This program is just an example of how the cryptosystem works.
 
 lll.py is an implementation of the LLL lattice reduction algorithm. It takes as input the basis of the lattice and its dimension
