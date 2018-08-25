@@ -11,13 +11,16 @@ This program is just an example of how the cryptosystem works.
 lll.py This is an implementation of the LLL lattice reduction algorithm. The user inputs the name of the file containing the basis on the command line. For example
 "python lll.py input.txt". The input file must contain a square matrix with base vectors of the lattice as rows.
 Coordinates must be separated by a space.
-The program then outputs LLL reduced basis that is more orthogonal. Moreover the first vector of the reduced basis solves the approximate shortest vector of the lattice -problem.
+The program then outputs LLL reduced basis that is more orthogonal. Moreover the first vector of the reduced basis solves the approximate shortest vector problem.
 
 gramschmidt.py takes as input the base vectors of a vector space and outputs an orthogonal basis for that space using the Gram-Schmidt process.
+The user inputs the name of the file containing the basis on the command line. For example
+"python gramschmidt.py input.txt". The input file must contain the base vectors of as lines.
+Coordinates must be separated by a space.
 
-babai.py is an implementation of Babai's algorithm. The algorithm finds the closest lattice point for a given vector
-providing that the used basis for the lattice is orthogonal enough.
-
-gauss.py implements the Gauss lattice reduction algorithm. It takes as input base vectors of an 2 dimensional lattice and outputs an basis that is more orthogonal. The first vector of the output basis is the shortest non-zero vector of the lattice.
-
-
+gauss.py implements the Gauss lattice reduction algorithm. It takes as input 
+base vectors of an 2 dimensional lattice and outputs an basis that is more orthogonal.
+The user inputs the name of the file containing the basis on the command line. For example
+"python gauss.py input.txt". The input file must contain a square matrix with base vectors of the lattice as rows.
+Coordinates must be separated by a space.
+The first vector of the output basis is the shortest non-zero vector of the lattice.
