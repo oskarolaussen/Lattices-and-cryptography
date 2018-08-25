@@ -30,34 +30,34 @@ def input_handler(filename):
 	'''generate_public_key takes as input the private key as a matrix and its dimension. 
 	Then it multiplies the private key with 5 random unimodular matrices from the right hand side thus creating the public key and outputs it'''
 def generate_public_key(n, pri_key):
-	k=0
+	k = 0
 	matrix = np.identity(n)
-	while k<5:
-		A=np.random.randint(-5,5,size=(n,n))
-		if np.linalg.det(A)==1:
-			matrix=np.matmul(matrix,A)
-			k=k+1
+	while k < 5:
+		A = np.random.randint(-5, 5, size=(n, n))
+		if np.linalg.det(A) == 1:
+			matrix = np.matmul(matrix, A)
+			k = k + 1
 	pub_key = np.matmul(matrix, pri_key)
 	return pub_key;
 	
 	'''encryption takes as input the message, the public key and the error vector and outputs the encrypted message.'''
 def encryption(m, pub_key, e):
-	c=np.matmul(m, pub_key)+e
+	c = np.matmul(m, pub_key) + e
 	return c;
 	
 	'''decryption uses Babai's algorithm to decrypt the encrypted message and outputs the original message (if the private key is orthogonal enough).'''
 def decryption(c, pri_key, pub_key):
 	u = np.matmul(c, np.linalg.inv(pri_key))
-	u=np.matmul(np.rint(u), pri_key)
-	result=np.matmul(u, np.linalg.inv(pub_key))
+	u = np.matmul(np.rint(u), pri_key)
+	result = np.matmul(u, np.linalg.inv(pub_key))
 	return result;
 
 filename = sys.argv[-1]
 private_key, dimension = input_handler(filename)
 public_key = generate_public_key(dimension, private_key)
-message=np.empty(dimension)
-message=[int(x) for x in input("Input the integer vector you wish to encrypt ").split()]
-encrypted=encryption(message, public_key, ERROR_VECTOR)
+message = np.empty(dimension)
+message = [int(x) for x in input("Input the integer vector you wish to encrypt ").split()]
+encrypted = encryption(message, public_key, ERROR_VECTOR)
 print(encrypted)
-decrypted=decryption(encrypted, private_key, public_key)
+decrypted = decryption(encrypted, private_key, public_key)
 print(decrypted)

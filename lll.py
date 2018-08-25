@@ -22,19 +22,19 @@ def gramschmidt(basis, dimension):
 def lll(basis, dimension, gramschmidt):
 	w=np.empty([dimension, dimension])
 	u=np.zeros([dimension, dimension])
-	w,u= gramschmidt(basis, dimension)
-	k=1
+	w,u = gramschmidt(basis, dimension)
+	k = 1
 	while k<dimension:
 		for j in range(k-1, -1, -1):
-			if abs(u[k][j])>0.5:
-				basis[k]=basis[k]-(np.rint(u[k,j]))*basis[j]
+			if abs(u[k][j]) > 0.5:
+				basis[k] = basis[k] - (np.rint(u[k,j])) * basis[j]
 				w,u=gramschmidt(basis, dimension)
-		if w[k].dot(w[k])>=(0.75-u[k][k-1]**2)*(w[k-1].dot(w[k-1])):
-			k=k+1
+		if w[k].dot(w[k]) >= (0.75 - u[k][k-1] ** 2) * (w[k-1].dot(w[k-1])):
+			k = k + 1
 		else:
-			basis[[k,k-1]]=basis[[k-1,k]]
-			w,u= gramschmidt(basis, dimension)
-			k=max(k-1,1)
+			basis[[k,k-1]] = basis[[k-1,k]]
+			w,u = gramschmidt(basis, dimension)
+			k = max(k - 1, 1)
 	return basis
 
 def input_handler(filename):
@@ -54,5 +54,5 @@ def input_handler(filename):
 	
 filename = sys.argv[-1]
 original_basis, dimension = input_handler(filename)
-reduced=lll(original_basis, dimension, gramschmidt)
+reduced = lll(original_basis, dimension, gramschmidt)
 print(reduced)
